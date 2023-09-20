@@ -17,13 +17,35 @@ Hide a text file in a photo
 
 Tip: Use a new image
 
-
+Project 3:
 
 Steghide via Steganography Toolkit
 https://github.com/DominicBreuker/stego-toolkit
 
+Start Docker.
 
+`docker pull dominicbreuker/stego-toolkit`
 
-Detect steganography:
+## Launch interactive shell
 
-https://github.com/zed-0xff/zsteg
+```
+cd ~/Desktop
+mkdir data
+docker run -it --rm -v $(pwd)/data:/data steghide-docker /bin/sh
+```
+
+## Embed data non-interactively
+
+```
+docker run --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /data/secret.txt -cf /data/photo.jpg -p iffybooks -sf /data/stego_file.jpg
+```
+
+## Extract data non-interactively
+
+```
+docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide extract -sf /data/stego_file.jpg
+```
+
+## Further reading ...
+
+dominicbreuker/stego-toolkit
