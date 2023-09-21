@@ -1,32 +1,91 @@
-# steganography-for-everyone
+# Steganography for everyone!
 
- How-to zine for a workshop on DIY steganography
+Steghide via 
 
-Steganography workshop
+## Convert an image into a JPEG with ImageMagick
 
-Project 1:
-Cat trick to put a pdf on an image
--> separate in a hex editor
+```
+convert example_image.png example_image.jpg
+```
 
-Project 2:
-OpenStego
-https://www.openstego.com
--> install Java first
+```
+convert -resize 50% Kit_Poster_for_School_Sept_2023.HEIC Kit_Poster_for_School_Sept_2023.jpg
+```
 
-Hide a text file in a photo
+# Steghide instructions for Linux
 
-Tip: Use a new image
+## Install Steghide
 
-Project 3:
+```
+sudo apt install steghide
+```
 
-Steghide via Steganography Toolkit
-https://github.com/DominicBreuker/stego-toolkit
+## Embed data in a JPEG file
 
-Start Docker.
+```
+cd ~/Desktop
+mkdir data
+cd data
+```
 
-`docker pull dominicbreuker/stego-toolkit`
+```
+steghide embed -f -ef secret.txt -cf photo.jpg -sf /data/stego_file.jpg
+```
 
-## Launch interactive shell
+You'll be prompted to enter a passphrase.
+
+## Extract data from a file
+
+```
+steghide extract -sf stego_file.jpg
+```
+
+# Mac + Windows Instructions
+
+## Download and install Docker
+
+```
+cd /Users/iffybooks/Downloads/steganography-for-everyone/steghide-docker 
+```
+
+## Build the Docker image
+
+```
+docker build -t steghide-docker .
+```
+
+Here's what the Dockerfile looks like:
+
+```
+FROM debian
+RUN apt-get update \
+    && apt-get install -y steghide  \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /data
+```
+
+## Prepare your data
+
+```
+cd ~/Desktop
+mkdir data
+```
+
+Go to your desktop and find the directory called **data**. Put a JPEG photo into the directory, along with a smaller file you're planning to hide.
+
+## Embed data in a JPEG file
+
+```
+docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /data/secret.txt -cf /data/photo.jpg -sf /data/stego_file.jpg
+```
+
+## Extract data from a JPEG file
+
+```
+docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide extract -sf /data/stego_file.jpg
+```
+
+## Launch interactive shell (for troubleshooting)
 
 ```
 cd ~/Desktop
@@ -34,18 +93,9 @@ mkdir data
 docker run -it --rm -v $(pwd)/data:/data steghide-docker /bin/sh
 ```
 
-## Embed data non-interactively
+## Further reading
 
-```
-docker run --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /data/secret.txt -cf /data/photo.jpg -p iffybooks -sf /data/stego_file.jpg
-```
+Steganography Toolkit
+https://github.com/DominicBreuker/stego-toolkit
 
-## Extract data non-interactively
-
-```
-docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide extract -sf /data/stego_file.jpg
-```
-
-## Further reading ...
-
-dominicbreuker/stego-toolkit
+docker pull dominicbreuker/stego-toolkit
