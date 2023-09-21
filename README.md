@@ -34,7 +34,7 @@ steghide embed -f -ef secret.txt -cf photo.jpg -sf /data/stego_file.jpg
 
 You'll be prompted to enter a passphrase.
 
-## Extract data from a file
+## Extract data from a JPEG file
 
 ```
 steghide extract -sf stego_file.jpg
@@ -44,11 +44,13 @@ steghide extract -sf stego_file.jpg
 
 ## Download and install Docker
 
+
+
+## Build the Docker image
+
 ```
 cd /Users/iffybooks/Downloads/steganography-for-everyone/steghide-docker 
 ```
-
-## Build the Docker image
 
 ```
 docker build -t steghide-docker .
@@ -98,4 +100,4 @@ docker run -it --rm -v $(pwd)/data:/data steghide-docker /bin/sh
 Steganography Toolkit
 https://github.com/DominicBreuker/stego-toolkit
 
-docker pull dominicbreuker/stego-toolkit
+`docker pull dominicbreuker/stego-toolkit`
