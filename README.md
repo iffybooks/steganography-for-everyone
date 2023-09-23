@@ -4,10 +4,9 @@
 
 # You should be able to communicate securely when you want to. There are currently plenty of good options for encrypted messaging ... but the future of the internet is unknown.
 
-If you don't want other people to read a message you're sending to a friend, you can use **cryptography** to scramble it up so that no one else can read it. If an adversary is monitoring your communications, however, they'll definitely be able to see that you're sending/receiving messages that look scrambled. That means it's possible to build networks and services that detect encrypted messages and block them.    
+If you don't want other people to read a message you're sending to a friend, you can use **cryptography** to scramble it up so that no one else can read it. If someone is monitoring your communications, however, they'll definitely be able to see that you're sending/receiving messages that look scrambled. That means it's possible to build networks and services that detect encrypted messages and block them.    
 
 If you don't think an encryption ban is a realistic possibility, check out what's happening in the UK: 
-
 [https://www.reuters.com/world/uk/uks-online-safety-bill-passed-by-parliament-2023-09-19/](https://www.reuters.com/world/uk/uks-online-safety-bill-passed-by-parliament-2023-09-19/)
 
 If you don't want your adversary to see your scrambled message and get wise to what you're doing, you can use **steganography** to conceal your secret message inside a message that looks innocuous.
@@ -18,7 +17,7 @@ Here are some ways you could potentially use steganography:
 
 • Run a photo blog with the location of a secret rave embedded in every image, readable by folks with the password.
 
-• Store something personal (like a private encryption key or your diary) in a photo of your cate.
+• Store something personal (like a private encryption key or your diary) in a photo of your cat.
 
 • Create an elaborate alternate reality game with a series of riddles hidden in photos scattered across the web, taking players on a twisty path that leads to your Bandcamp page.
 
@@ -32,12 +31,10 @@ In this workshop you'll use the command-line program **steghide** to hide secret
 
 If you're using Linux, you should be able to install steghide with your package manager. Installing steghide on macOS & Windows is trickier, so we recommend running it via Docker. 
 
-You can find this zine on our website at the following URL:
-
+You can find this zine on our website at the following URL
 [https://iffybooks.net/steganography](https://iffybooks.net/steganography)
 
 Source code and example files are on GitHub:
-
 [https://github.com/iffybooks/steganography-for-everyone](https://github.com/iffybooks/steganography-for-everyone)
 
 ## How do you hide data in a photo?
@@ -97,7 +94,6 @@ sudo apt install imagemagick
 
 ❏ Go to the following URL and follow the instructions to install the Homebrew package manager. You'll need to copy a line of code, paste it into your terminal, and press enter.
 
-
 https://brew.sh
 
 *Warning:* If you haven't used the command line much before, at this point you'll be prompted to install a bundle of tools and libraries from Apple that will take a long time to download (possibly 20 minutes or more). If you're at an in-person workshop, you may want to skip this step and finish at home.
@@ -111,12 +107,10 @@ brew install imagemagick
 ### *Windows*
 
 ❏ Go to the URL below and follow the instructions to install the Chocolatey package manager:
-
 https://chocolatey.org/install
 
 ❏ Open PowerShell. 
-↳ Or, for a more Linux-like shell experience, install and launch Git Bash: 
-
+↳ Or, for a more Linux-like shell experience, install and launch Git Bash:
 https://git-scm.com/downloads
 
 ❏ Run the following command to install ImageMagick.
@@ -183,12 +177,10 @@ If you need a passphrase you can remember, a good strategy is to use four ordina
 To generate a passphrase in this style, you'll need to choose words at random from a list. One way to do it is to use a **diceware list**, which maps sequences of dice rolls to words. Rolling dice is reliably random and not easily surveilled.
 
 You can find a diceware list at the following URL:
-
-https://www.eff.org/dice
+[https://www.eff.org/dice](https://www.eff.org/dice)
 
 Or download a printable PDF from our website:
-
-https://iffybooks.net/Diceware_List.pdf
+[https://iffybooks.net/Diceware_List.pdf](https://iffybooks.net/Diceware_List.pdf)
 
 ❏ To select a word from the diceware list, roll a 6-sided die five times and write down the outcomes (or roll 5 dice simultaneously). You'll end up with a sequence of numbers like `14636`.
 
@@ -248,13 +240,11 @@ Enter the passphrase at the prompt and your secret file will be written to the c
 ## Download and install Docker
 
 ❏ Go to the following URL and follow the instructions to install Docker Desktop:
-
 [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
 ## Download the project code
 
 ❏ Go to the following URL:
-
 [https://github.com/iffybooks/steganography-for-everyone](https://github.com/iffybooks/steganography-for-everyone)
 
 ❏ To download the code, click **Code** and select **Download ZIP** from the dropdown menu.
@@ -292,6 +282,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /data
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## Embed data in a JPEG file (Docker)
 
@@ -364,21 +356,17 @@ This technique removes most of the obvious metadata from an image file, such as 
 ## Further reading
 
 - Steghide official quick start page:
-
   https://steghide.sourceforge.net/documentation.php
 
 - Steghide man page (manual):
-
   https://steghide.sourceforge.net/documentation/manpage.php
 
 - Steganography Toolkit (a Docker image with various steganography tools preinstalled)
-
   https://github.com/DominicBreuker/stego-toolkit
   
   Run this command to download the image: `docker pull dominicbreuker/stego-toolkit`
 
 - 'Digital image steganography: Survey and analysis of current methods' (Cheddad, Condell, Curran, and McKevitt 2010)
-
   https://www.sciencedirect.com/science/article/abs/pii/S0165168409003648
 
 <div style="page-break-after: always;"></div>
