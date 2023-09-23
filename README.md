@@ -83,9 +83,9 @@ If you're using an iPhone your photo will be in HEIC format (High Efficiency Ima
 
 You'll install ImageMagick using the **apt** package manager. 
 
-❏ First you'll open a terminal window. Click the square grid icon in the lower left corner of the screen, type "terminal", and select the application called Terminal. 
+❏ First you'll open a terminal window. Click the square grid icon in the lower left corner of the screen, type "terminal", and select the application called **Terminal**. 
 
-❏ Run the following two commands, which will update apt's list of packages and install ImageMagick. You'll need to enter your password.
+❏ Run the following two commands, which will update **apt**'s list of packages and install **ImageMagick**. You'll need to enter your password.
 
 ```
 sudo apt update
@@ -96,13 +96,13 @@ sudo apt install imagemagick
 
 ❏ Open the **Terminal** application. You can search for it using Spotlight or find it in this directory: `/Applications/Utilities/`
 
-❏ Go to the following URL and follow the instructions to install the Homebrew package manager. You'll need to copy a line of code, paste it into your terminal, and press enter.
+❏ Go to the following URL and follow the instructions to install the **Homebrew** package manager. You'll need to copy a line of code, paste it into your terminal, and press enter.
 
 https://brew.sh
 
 *Warning:* If you haven't used the command line much before, at this point you'll be prompted to install a bundle of tools and libraries from Apple that will take a long time to download (possibly 20 minutes or more). If you're at an in-person workshop, you may want to skip this step and finish at home.
 
-❏ Once Homebrew in installed, run the following command to install ImageMagick:
+❏ Once Homebrew is installed, run the following command to install **ImageMagick**:
 
 ```
 brew install imagemagick
@@ -110,14 +110,15 @@ brew install imagemagick
 
 ### *Windows*
 
-❏ Go to the URL below and follow the instructions to install the Chocolatey package manager:
+❏ Go to the URL below and follow the instructions to install the **Chocolatey** package manager:
 https://chocolatey.org/install
 
-❏ Open PowerShell. 
-↳ Or, for a more Linux-like shell experience, install and launch Git Bash:
+❏ Open PowerShell.
+
+↳ Or, for a more Linux-like shell experience, install and launch **Git Bash**:
 https://git-scm.com/downloads
 
-❏ Run the following command to install ImageMagick.
+❏ Run the following command to install **ImageMagick**.
 
 ```
 choco install imagemagick
@@ -226,8 +227,6 @@ steghide embed -ef secret.txt -cf photo.jpg -sf stego_file.jpg
 ❏ In the file explorer/Finder, go to the `data` directory on the desktop. You should see a new JPEG file (`stego_file.jpg` in the example) which contains your encrypted message. Compare the size of the altered file to the original JPEG.
 
 ❏ Open both JPEG files with an image viewer application and compare them. Do you see a difference? (Hint: You can probably see a difference.)
-
-<div style="page-break-after: always;"></div>
 
 ## Extract secret data from a JPEG file (Linux)
 
