@@ -223,6 +223,7 @@ steghide embed -ef secret.txt -cf photo.jpg -sf stego_file.jpg
 ```
 steghide extract -sf stego_file.jpg
 ```
+
 Enter the passphrase at the prompt and your secret file will be written to the current directory.
 
 <div style="page-break-after: always;"></div>
@@ -277,7 +278,7 @@ WORKDIR /data
 
 ## Embed data in a JPEG file (Docker)
 
-❏ 
+❏ Run the command below to `cd` to the desktop.
 
 ```
 cd ~/Desktop
@@ -305,7 +306,23 @@ docker run -it --rm -v $(pwd)/data:/data steghide-docker /bin/sh
 
 ## Remove all image metadata with exiftool
 
-## Hide a longer file in a photo
+For good measure, you may want to remove all the metadata from your altered JPEG file before sharing it. To do this, you can use the program `exiftool`.
+
+❏ You can install `exiftool` it with `apt` on Ubuntu, with `brew` on macOS, and with `choco` on Windows.
+
+❏ To remove metadata from an image, first `cd` to the directory where it's located.
+
+```
+cd ~/Desktop/data/
+```
+
+❏ Run the command below to remove metadata, substituting your filename for `stego_file.jpg`
+
+```
+exiftool -all= stego_file.jpg
+```
+
+This technique removes most of the obvious metadata from an image file, such as unique identifier strings and GPS coordinates. But there may be other identifiers 
 
 ## Caveats
 
