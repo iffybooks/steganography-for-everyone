@@ -29,7 +29,7 @@ In this workshop you'll use the command-line program **steghide** to hide secret
 If you're using Linux, you should be able to install steghide with your package manager. Installing steghide on macOS & Windows is trickier, so we recommend running it via Docker. 
 
 You can find this zine on our website at the following URL:
-https://iffybooks.net/steganography-for-everyone
+https://iffybooks.net/steganography
 
 Source code and example files are on GitHub:
 https://github.com/iffybooks/steganography-for-everyone
@@ -196,6 +196,8 @@ sudo apt update
 sudo apt install steghide
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Embed data in a JPEG file (Linux)
 
 ❏ First, `cd` to the `data` directory on your desktop. (You can skip this step if you're already there.)
@@ -284,27 +286,35 @@ WORKDIR /data
 cd ~/Desktop
 ```
 
-❏ 
+❏ Type (or copy and paste) the Docker command below into your terminal window and press enter. In the example, we have a directory called `data` on the desktop which contains a JPEG called `photo.jpg` and a secret message called `secret.txt`. The output file will be called `stego_file.jpg`.
 
 ```
 docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /data/secret.txt -cf /data/photo.jpg -sf /data/stego_file.jpg
 ```
 
+❏ At the prompt, enter the passphrase you generated earlier.
+
+❏ In the file explorer/Finder, go to the `data` directory on the desktop. You should see a new JPEG file (`stego_file.jpg` in the example) which contains your encrypted message. Compare the size of the altered file to the original JPEG.
+
+❏ Open both JPEG files with an image viewer application and compare them. Do you see a difference? (Hint: You can probably see a difference.)
+
 ## Extract data from a JPEG file (Docker)
+
+❏ Run the command below to `cd` to the desktop.
+
+```
+cd ~/Desktop
+```
+
+❏ To extract the secret file from a JPEG file, run a command like the one below. You'll replace `stego_file.jpg` with the name of your altered JPEG file.
 
 ```
 docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide extract -sf /data/stego_file.jpg
 ```
 
-## Launch interactive shell (for troubleshooting)
+Enter the passphrase at the prompt and your secret file will be written to the `data` directory on your desktop.
 
-```
-cd ~/Desktop
-mkdir data
-docker run -it --rm -v $(pwd)/data:/data steghide-docker /bin/sh
-```
-
-## Remove all image metadata with exiftool
+## Remove image metadata with exiftool
 
 For good measure, you may want to remove all the metadata from your altered JPEG file before sharing it. To do this, you can use the program `exiftool`.
 
@@ -372,7 +382,7 @@ This technique removes most of the obvious metadata from an image file, such as 
 
 **Anti-copyright 2023**
 
-**iffybooks.net/steganography-for-everyone**
+**iffybooks.net/steganography**
 
 <br />
 <br />
