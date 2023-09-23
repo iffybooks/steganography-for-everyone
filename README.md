@@ -225,34 +225,47 @@ steghide extract -sf stego_file.jpg
 ```
 Enter the passphrase at the prompt and your secret file will be written to the current directory.
 
+<div style="page-break-after: always;"></div>
 
-# Mac + Windows Instructions
-
-## Download the project code
-
-https://github.com/iffybooks/steganography-for-everyone
+# Steghide instructions for macOS + Windows
 
 ## Download and install Docker
 
-## 
+❏ Go to the following URL and follow the instructions to install Docker Desktop:
+https://docs.docker.com/engine/install/
 
-## 
+## Download the project code
+
+❏ Go to the following URL:
+https://github.com/iffybooks/steganography-for-everyone
+
+❏ To download the code, click **Code** and select **Download ZIP** from the dropdown menu.
+
+❏ Find the ZIP file you just downloaded, `steganography-for-everyone-main.zip`. Double click the file to unzip it, which should create a directory called `steganography-for-everyone-main`.
 
 ## Build the Docker image
 
-❏ 
+In the directory `steganography-for-everyone-main`, there's another directory called `steghide-docker`. This contains a file called `Dockerfile`, which contains code that tells Docker what components to download.
+
+❏ To build the Docker image you'll use to run `steghide`, you'll need to `cd` into the directory `steghide-docker`.
+
+Open a terminal window and type `cd` followed by a space.
+
+Next, in your file explorer/Finder, find the `steghide-docker` directory and drag it onto the terminal window. You'll end up with a command like the one below, with the directory's full pathname. Press enter to run the command.
 
 ```
 cd /Users/iffybooks/Downloads/steganography-for-everyone/steghide-docker 
 ```
 
-❏ 
+❏ Next, type out the command below and run it to build your docker image. The `-t` option specifies that the image will be called `steghide-docker`. The period (`.`) at the end means Docker should look for a Dockerfile in the current directory.
 
 ```
 docker build -t steghide-docker .
 ```
 
-Here's what the Dockerfile looks like:
+Docker will take a few minutes to download the necessary components and build the image.
+
+If you're curious, here's what the Dockerfile we're using looks like. It's short and to the point:
 
 ```
 FROM debian
@@ -263,6 +276,14 @@ WORKDIR /data
 ```
 
 ## Embed data in a JPEG file (Docker)
+
+❏ 
+
+```
+cd ~/Desktop
+```
+
+❏ 
 
 ```
 docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /data/secret.txt -cf /data/photo.jpg -sf /data/stego_file.jpg
