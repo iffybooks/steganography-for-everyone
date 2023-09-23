@@ -218,6 +218,8 @@ steghide embed -ef secret.txt -cf photo.jpg -sf stego_file.jpg
 
 ❏ Open both JPEG files with an image viewer application and compare them. Do you see a difference? (Hint: You can probably see a difference.)
 
+<div style="page-break-after: always;"></div>
+
 ## Extract secret data from a JPEG file (Linux)
 
 ❏ To extract the secret file from a JPEG file, run a command like the one below. You'll replace `stego_file.jpg` with the name of your altered JPEG file.
@@ -334,7 +336,7 @@ exiftool -all= stego_file.jpg
 
 This technique removes most of the obvious metadata from an image file, such as unique identifier strings and GPS coordinates. But there may be other identifiers 
 
-## Caveats
+## Caveats to keep in mind
 
 - Social media sites like Instagram and Facebook will re-compress every image you upload, which will most likely destroy your hidden message. Just a heads-up.
 
