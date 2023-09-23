@@ -2,13 +2,17 @@
 
 <div style="page-break-after: always;"></div>
 
-# You should be able to communicate securely when you want to. Steganography is worth knowing about.
+# You should be able to communicate securely when you want to. There are currently plenty of good options for encrypted messaging ... but the future of the internet is unknown.
 
-If you don't want other people to read your messages, you can use **cryptography** to scramble your message so that no one else can read it. If someone's looking over your shoulder, however, they'll be able to see that you're sending/receiving messages that look scrambled. 
+If you don't want other people to read a message you're sending to a friend, you can use **cryptography** to scramble it up so that no one else can read it. If an adversary is monitoring your communications, however, they'll definitely be able to see that you're sending/receiving messages that look scrambled. That means it's possible to build networks and services that detect encrypted messages and block them.    
 
-If you don't want your adversary to see your scrambled message and get wise to what you're doing, you can use **steganography** to conceal your secret message in something innocuous, like a photo of a sunset.
+If you don't think an encryption ban is a realistic possibility, check out what's happening in the UK: 
 
-Here are some ways you could use steganography:
+[https://www.reuters.com/world/uk/uks-online-safety-bill-passed-by-parliament-2023-09-19/](https://www.reuters.com/world/uk/uks-online-safety-bill-passed-by-parliament-2023-09-19/)
+
+If you don't want your adversary to see your scrambled message and get wise to what you're doing, you can use **steganography** to conceal your secret message inside a message that looks innocuous.
+
+Here are some ways you could potentially use steganography:
 
 • Exchange off-the-record messages via ordinary email, hidden in vacation photos.
 
@@ -29,26 +33,26 @@ In this workshop you'll use the command-line program **steghide** to hide secret
 If you're using Linux, you should be able to install steghide with your package manager. Installing steghide on macOS & Windows is trickier, so we recommend running it via Docker. 
 
 You can find this zine on our website at the following URL:
-https://iffybooks.net/steganography
+
+[https://iffybooks.net/steganography](https://iffybooks.net/steganography)
 
 Source code and example files are on GitHub:
-https://github.com/iffybooks/steganography-for-everyone
+
+[https://github.com/iffybooks/steganography-for-everyone](https://github.com/iffybooks/steganography-for-everyone)
 
 ## How do you hide data in a photo?
 
-Most digital photos you'll come across use RGB color, which means each pixel is made up of three values: a number for the degree of redness, a number for green, and a number for blue. 
+Most digital photos you'll come across use RGB color, which means each pixel is made up of three number values: an integer for the degree of redness, an integer for green, and an integer for blue. In an 8-bit image, those numbers can be `0` through `255`.
 
-In the language of math & computer science, a **bit** is the smallest possible piece of information, equivalent to the choice between `0` and `1`. 
+In the language of math & computer science, a **bit** is the smallest possible piece of information, equivalent to the choice between `0` and `1`. The outcome of a coin toss is one bit of information.
 
 To hide a single bit of information in a pixel, we can simply overwrite the least significant bit in one of the color values. Let's say the pixel's red value is `224`, which translates to `11100000` in binary. To store the bit `1` in the pixel, we'd change the value to `11100001`. To store the bit `0`, we'd leave it as-is. Encoding messages in a photo this way is equivalent to adding noise to the image.
 
-The program `steghide` does something like the steps described above, as well as a lot more sophisticated math to cover its tracks.
+The program `steghide` does something like the steps described above, as well as using a lot of sophisticated math to cover its tracks.
 
 ## Take a photo
 
-You'll start by creating two files: a JPEG image and a smaller file you'll conceal inside it.
-
-For the JPEG file, you'll want to use an image that isn't available elsewhere on the web. Here's why:
+You'll start by creating two files: a JPEG image and a smaller file you'll conceal inside it. For the JPEG file, you'll want to use an image that isn't available elsewhere on the web. Here's why:
 
 Let's say you grab a photo from a stock photo site, hide your secret message in it, and post the updated image file on your blog. If an adversary suspects you're using steganography, they can do a reverse image search and find the original file. If the images look similar but the JPEG on your site is slightly larger, that's a clue you may be using steganography.
 
@@ -56,9 +60,9 @@ Let's say you grab a photo from a stock photo site, hide your secret message in 
 
 ## Transfer the photo to your computer
 
-❏ Go to your desktop and create a new directory called `data`. 
+❏ Go to the desktop on your computer and create a new directory called `data`. 
 
-❏ Transfer your new photo to your computer and put it in the `data` directory you just created. 
+❏ Transfer your new photo to your computer and put it in the `data` directory. 
 
 ↳ You can transfer the file using cloud storage, but then you've made a copy of the original file that can hypothetically be compared to the version with a hidden message. Best to avoid cloud storage if possible, at least for this workshop.
 
@@ -66,7 +70,7 @@ Let's say you grab a photo from a stock photo site, hide your secret message in 
 
 ↳ For both iOS and Android, you can get an adapter that lets you connect a USB thumb drive or microSD card to your phone. It's a handy trick for transferring files to a computer without using the internet.
 
-<img title="" src="images/182a671f9a81134f0b3c2732e8a0cdee8f2d1702.jpg" alt="th-3964907078.jpg" width="226" data-align="center">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img title="" src="images/182a671f9a81134f0b3c2732e8a0cdee8f2d1702.jpg" alt="USB to Lightning adapter" width="106" data-align="inline">&nbsp;<img title="" src="images/7422200a29ade10408375ba72844f22a1f46382d.jpg" alt="USB-C to USB adapter" width="103"> 
 
 ## Install ImageMagick (optional)
 
@@ -92,6 +96,8 @@ sudo apt install imagemagick
 ❏ Open the **Terminal** application. You can search for it using Spotlight or find it in this directory: `/Applications/Utilities/`
 
 ❏ Go to the following URL and follow the instructions to install the Homebrew package manager. You'll need to copy a line of code, paste it into your terminal, and press enter.
+
+
 https://brew.sh
 
 *Warning:* If you haven't used the command line much before, at this point you'll be prompted to install a bundle of tools and libraries from Apple that will take a long time to download (possibly 20 minutes or more). If you're at an in-person workshop, you may want to skip this step and finish at home.
@@ -105,10 +111,13 @@ brew install imagemagick
 ### *Windows*
 
 ❏ Go to the URL below and follow the instructions to install the Chocolatey package manager:
+
 https://chocolatey.org/install
 
 ❏ Open PowerShell. 
-↳ Or, for a more Linux-like shell experience, install and launch Git Bash: https://git-scm.com/downloads
+↳ Or, for a more Linux-like shell experience, install and launch Git Bash: 
+
+https://git-scm.com/downloads
 
 ❏ Run the following command to install ImageMagick.
 
@@ -174,9 +183,11 @@ If you need a passphrase you can remember, a good strategy is to use four ordina
 To generate a passphrase in this style, you'll need to choose words at random from a list. One way to do it is to use a **diceware list**, which maps sequences of dice rolls to words. Rolling dice is reliably random and not easily surveilled.
 
 You can find a diceware list at the following URL:
+
 https://www.eff.org/dice
 
 Or download a printable PDF from our website:
+
 https://iffybooks.net/Diceware_List.pdf
 
 ❏ To select a word from the diceware list, roll a 6-sided die five times and write down the outcomes (or roll 5 dice simultaneously). You'll end up with a sequence of numbers like `14636`.
@@ -237,12 +248,14 @@ Enter the passphrase at the prompt and your secret file will be written to the c
 ## Download and install Docker
 
 ❏ Go to the following URL and follow the instructions to install Docker Desktop:
-https://docs.docker.com/engine/install/
+
+[https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
 ## Download the project code
 
 ❏ Go to the following URL:
-https://github.com/iffybooks/steganography-for-everyone
+
+[https://github.com/iffybooks/steganography-for-everyone](https://github.com/iffybooks/steganography-for-everyone)
 
 ❏ To download the code, click **Code** and select **Download ZIP** from the dropdown menu.
 
@@ -351,17 +364,21 @@ This technique removes most of the obvious metadata from an image file, such as 
 ## Further reading
 
 - Steghide official quick start page:
+
   https://steghide.sourceforge.net/documentation.php
 
 - Steghide man page (manual):
+
   https://steghide.sourceforge.net/documentation/manpage.php
 
 - Steganography Toolkit (a Docker image with various steganography tools preinstalled)
+
   https://github.com/DominicBreuker/stego-toolkit
   
   Run this command to download the image: `docker pull dominicbreuker/stego-toolkit`
 
 - 'Digital image steganography: Survey and analysis of current methods' (Cheddad, Condell, Curran, and McKevitt 2010)
+
   https://www.sciencedirect.com/science/article/abs/pii/S0165168409003648
 
 <div style="page-break-after: always;"></div>
