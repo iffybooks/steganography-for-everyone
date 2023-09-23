@@ -11,6 +11,8 @@ If you don't think an encryption ban is a realistic possibility, check out what'
 
 If you don't want your adversary to see your scrambled message and get wise to what you're doing, you can use **steganography** to conceal your secret message inside a message that looks innocuous.
 
+<div style="page-break-after: always;"></div>
+
 Here are some ways you could potentially use steganography:
 
 • Exchange off-the-record messages via ordinary email, hidden in vacation photos.
@@ -19,7 +21,7 @@ Here are some ways you could potentially use steganography:
 
 • Store something personal (like a private encryption key or your diary) in a photo of your cat.
 
-• Create an elaborate alternate reality game with a series of riddles hidden in photos scattered across the web, taking players on a twisty path that leads to your Bandcamp page.
+• Create an elaborate alternate reality game with a series of riddles hidden in photos scattered across the web, taking players on a twisty path that ultimately leads to your Bandcamp page.
 
 We're approaching this project with a spirit of old-school hacker curiosity. We like trying things out and seeing what's possible. But we're super ethical, super antifascist, and we don't have time for libertarian nonsense. If you’re trying to do something creepy/right-wing with the knowledge in this zine, please fuck off and leave us alone. We don't want anything to do with you.
 
@@ -31,7 +33,7 @@ In this workshop you'll use the command-line program **steghide** to hide secret
 
 If you're using Linux, you should be able to install steghide with your package manager. Installing steghide on macOS & Windows is trickier, so we recommend running it via Docker. 
 
-You can find this zine on our website at the following URL
+You can find this zine on our website at the following URL:
 [https://iffybooks.net/steganography](https://iffybooks.net/steganography)
 
 Source code and example files are on GitHub:
@@ -43,7 +45,7 @@ Most digital photos you'll come across use RGB color, which means each pixel is 
 
 In the language of math & computer science, a **bit** is the smallest possible piece of information, equivalent to the choice between `0` and `1`. The outcome of a coin toss is one bit of information.
 
-To hide a single bit of information in a pixel, we can simply overwrite the least significant bit in one of the color values. Let's say the pixel's red value is `224`, which translates to `11100000` in binary. To store the bit `1` in the pixel, we'd change the value to `11100001`. To store the bit `0`, we'd leave it as-is. Encoding messages in a photo this way is equivalent to adding noise to the image.
+To hide a single bit of information in a pixel, we can simply overwrite the least significant bit in one of the color values. Let's say a pixel's red value is `224`, which translates to `11100000` in binary. To store the bit `1` in the pixel, we'd change the value to `11100001`. To store the bit `0`, we'd leave it as-is. Encoding messages in a photo this way is equivalent to adding noise to the image.
 
 The program `steghide` does something like the steps described above, as well as using a lot of sophisticated math to cover its tracks.
 
@@ -51,9 +53,9 @@ The program `steghide` does something like the steps described above, as well as
 
 You'll start by creating two files: a JPEG image and a smaller file you'll conceal inside it. For the JPEG file, you'll want to use an image that isn't available elsewhere on the web. Here's why:
 
-Let's say you grab a photo from a stock photo site, hide your secret message in it, and post the updated image file on your blog. If an adversary suspects you're using steganography, they can do a reverse image search and find the original file. If the images look similar but the JPEG on your site is slightly larger, that's a clue you may be using steganography.
+Let's say you grab a photo from a stock photo site, hide your secret message in it, and post the altered image file on your blog. If an adversary suspects you're using steganography, they can do a reverse image search and find the original file. If the images look similar but the JPEG on your site is slightly larger, that's a clue you may be using steganography.
 
-❏ Take a photo using your phone or a digital camera.
+❏ To get started, take a photo using your phone or a digital camera. If you're trying to be cloak-and-dagger, you can avoid including identifying details in the image.
 
 ## Transfer the photo to your computer
 
@@ -67,7 +69,9 @@ Let's say you grab a photo from a stock photo site, hide your secret message in 
 
 ↳ For both iOS and Android, you can get an adapter that lets you connect a USB thumb drive or microSD card to your phone. It's a handy trick for transferring files to a computer without using the internet.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img title="" src="images/182a671f9a81134f0b3c2732e8a0cdee8f2d1702.jpg" alt="USB to Lightning adapter" width="106" data-align="inline">&nbsp;<img title="" src="images/7422200a29ade10408375ba72844f22a1f46382d.jpg" alt="USB-C to USB adapter" width="103"> 
+&nbsp;&nbsp;<img title="" src="images/182a671f9a81134f0b3c2732e8a0cdee8f2d1702.jpg" alt="USB to Lightning adapter" width="90" data-align="inline">&nbsp;<img title="" src="images/7422200a29ade10408375ba72844f22a1f46382d.jpg" alt="USB-C to USB adapter" width="90"> 
+
+<div style="page-break-after: always;"></div>
 
 ## Install ImageMagick (optional)
 
@@ -119,7 +123,9 @@ https://git-scm.com/downloads
 choco install imagemagick
 ```
 
-## Convert your photo to JPEG with ImageMagick (optional)
+<div style="page-break-after: always;"></div>
+
+## Convert your photo to a JPEG with ImageMagick (optional)
 
 ❏ Open a terminal window and run the following command to `cd` (change directory) to the `data` directory on the desktop.
 
@@ -188,6 +194,8 @@ Or download a printable PDF from our website:
 
 ❏ Repeat the process and select three more words. Your final passphrase will look something like this: `CaravanYenGraphFailing`
 
+<div style="page-break-after: always;"></div>
+
 # Steghide instructions for Linux
 
 ## Install Steghide (Linux)
@@ -198,8 +206,6 @@ Or download a printable PDF from our website:
 sudo apt update
 sudo apt install steghide
 ```
-
-<div style="page-break-after: always;"></div>
 
 ## Embed data in a JPEG file (Linux)
 
@@ -305,6 +311,8 @@ docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /
 
 ❏ Open both JPEG files with an image viewer application and compare them. Do you see a difference? (Hint: You can probably see a difference.)
 
+<div style="page-break-after: always;"></div>
+
 ## Extract data from a JPEG file (Docker)
 
 ❏ Run the command below to `cd` to the desktop.
@@ -352,6 +360,8 @@ This technique removes most of the obvious metadata from an image file, such as 
 - Be careful who you share passwords with.
 
 - Depending on your situation, having steghide installed on your computer may look suspicious. Uninstalling things when you're done is an option.
+
+<div style="page-break-after: always;"></div>
 
 ## Further reading
 
