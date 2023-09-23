@@ -34,6 +34,16 @@ https://iffybooks.net/steganography-for-everyone
 Source code and example files are on GitHub:
 https://github.com/iffybooks/steganography-for-everyone
 
+## How do you hide data in a photo?
+
+Most digital photos you'll come across use RGB color, which means each pixel is made up of three values: a number for the degree of redness, a number for green, and a number for blue. 
+
+In the language of math & computer science, a **bit** is the smallest possible piece of information, equivalent to the choice between `0` and `1`. 
+
+To hide a single bit of information in a pixel, we can simply overwrite the least significant bit in one of the color values. Let's say the pixel's red value is `224`, which translates to `11100000` in binary. To store the bit `1` in the pixel, we'd change the value to `11100001`. To store the bit `0`, we'd leave it as-is. Encoding messages in a photo this way is equivalent to adding noise to the image.
+
+The program `steghide` does something like the steps described above, as well as a lot more sophisticated math to cover its tracks.
+
 ## Take a photo
 
 You'll start by creating two files: a JPEG image and a smaller file you'll conceal inside it.
@@ -58,76 +68,167 @@ Let's say you grab a photo from a stock photo site, hide your secret message in 
 
 <img title="" src="images/182a671f9a81134f0b3c2732e8a0cdee8f2d1702.jpg" alt="th-3964907078.jpg" width="226" data-align="center">
 
-## Convert your photo into a JPEG with ImageMagick
+## Install ImageMagick (optional)
 
-If you're using a digital camera or an Android phone, the photo you transferred to your computer is probably already in JPEG format. If so, the filename will end with ".jpg" or ".jpeg".
+If the filename of the photo you just transferred to your computer ends with ".jpg" or ".jpeg", you can skip this step and the next one. If you're using a digital camera or Android phone, this probably includes you.
 
-If you're using an iPhone, you
+If you're using an iPhone your photo will be in HEIC format (High Efficiency Image File Format), which you'll need to convert to JPEG.
 
-Install ImageMagick
+### *Debian-based Linux (Ubuntu etc.)*
+
+You'll install ImageMagick using the **apt** package manager. 
+
+❏ First you'll open a terminal window. Click the square grid icon in the lower left corner of the screen, type "terminal", and select the application called Terminal. 
+
+❏ Run the following two commands, which will update apt's list of packages and install ImageMagick. You'll need to enter your password.
 
 ```
-convert example_image.png example_image.jpg
+sudo apt update
+sudo apt install imagemagick
 ```
+
+### *macOS*
+
+❏ Open the **Terminal** application. You can search for it using Spotlight or find it in this directory: `/Applications/Utilities/`
+
+❏ Go to the following URL and follow the instructions to install the Homebrew package manager. You'll need to copy a line of code, paste it into your terminal, and press enter.
+https://brew.sh
+
+*Warning:* If you haven't used the command line much before, at this point you'll be prompted to install a bundle of tools and libraries from Apple that will take a long time to download (possibly 20 minutes or more). If you're at an in-person workshop, you may want to skip this step and finish at home.
+
+❏ Once Homebrew in installed, run the following command to install ImageMagick:
+
+```
+brew install imagemagick
+```
+
+### *Windows*
+
+❏ Go to the URL below and follow the instructions to install the Chocolatey package manager:
+https://chocolatey.org/install
+
+❏ Open PowerShell. 
+↳ Or, for a more Linux-like shell experience, install and launch Git Bash: https://git-scm.com/downloads
+
+❏ Run the following command to install ImageMagick.
+
+```
+choco install imagemagick
+```
+
+## Convert your photo to JPEG with ImageMagick (optional)
+
+❏ Open a terminal window and run the following command to `cd` (change directory) to the `data` directory on the desktop.
+
+```
+cd ~/Desktop/data
+```
+
+↳ In Windows, try the command `cd Desktop/data` in a new PowerShell (or Git Bash) window instead.
+
+❏ Run the command `ls` and you'll see the HEIC file you just transferred to your computer.
+
+```
+ls
+```
+
+❏ Type out a command like the one below, swapping in the filename of your HEIC file. The second filename is the output filename, which can be anything as long as it ends with `.jpg`. Press enter to run the command.
+
+```
+convert IMG_5042.HEIC IMG_5042.jpg
+```
+
+❏ In your file explorer/Finder, go to the desktop and open the `data` directory. You should see the JPEG file you just created. 
+
+❏ To resize your photo to the size you want, you can add the `-resize` option followed by the percentage you want, as in the command below:
 
 ```
 convert -resize 50% IMG_5042.HEIC IMG_5042.jpg
 ```
 
-## Transfer the photo to your computer
+↳ If you have trouble installing ImageMagick, or if you prefer using a program with a GUI, another option is to install GIMP (Gnu Image Manipulation Program) and use it to convert HEIC files to JPEGs. You can download it here:
+https://www.gimp.org
 
 ## Create your secret message
 
-## Choose a good passphrase
+Next you'll create/choose your secret message file. You can embed any kind of file you want, as long as it's smaller (<10%-ish) than the JPEG you're hiding it in. 
 
-It's *very* important to use a strong password. We'd recommend 20 characters or more to be on the safe side.
+❏ Open a plaintext editor (such as Sublime Text) and write a secret message. Save it to the `data` directory on your desktop, with a filename like `secret.txt`.
 
-One way to get through password protection is to use a **brute force** attack, which involves guessing thousands, millions, of billions of possible passwords until one works. Brute force attacks aren't practical for online services like email, because the service provider will shut off access after a certain number of guesses. 
+↳ Alternately, find a small image or text file on the web and save it to your `data` directory.
 
-For email, an 8-character password like "Ql?e2HwX" is probably fine. For an encrypted file, there's a reasonable chance someone will be able to 
+## Generate a strong passphrase
+
+It's *very* important to use a strong passphrase that you haven't shared or used elsewhere. 
+
+One way to defeat password protection is to use a **brute force** attack, which involves guessing billions of possible passwords until one works. Brute force attacks aren't practical for online services like email, because the service provider will limit the number of guesses per second and shut off access after a certain number of attempts. 
+
+Password-protected files are different, because there's no service provider in the loop to limit the number of guesses allowed. If someone has a lot of computing power, they can try millions of guesses per second until they land on the right combination.
+
+One option is to use a totally random password like `0Q8&fLahAAv57L?bUjRt`, which you can generate and store using a password manager.
+
+If you need a passphrase you can remember, a good strategy is to use four ordinary words selected at random. This XKCD comic explains, in condensed form, why this approach is sound:
 
 <img title="To anyone who understands information theory and security and is in an infuriating argument with someone who does not (possibly involving mixed case), I sincerely apologize." src="images/password_strength.png" alt="Password Strength" data-align="center" width="540">
 
-Printable Diceware List:
+To generate a passphrase in this style, you'll need to choose words at random from a list. One way to do it is to use a **diceware list**, which maps sequences of dice rolls to words. Rolling dice is reliably random and not easily surveilled.
+
+You can find a diceware list at the following URL:
+https://www.eff.org/dice
+
+Or download a printable PDF from our website:
 https://iffybooks.net/Diceware_List.pdf
 
-CaravanYenGraphFailing
+❏ To select a word from the diceware list, roll a 6-sided die five times and write down the outcomes (or roll 5 dice simultaneously). You'll end up with a sequence of numbers like `14636`.
+
+❏ In the diceware list, find the word that corresponds to the numbers you rolled. If you look up `14636` you'll find the word `caravan`.
+
+❏ Repeat the process and select three more words. Your final passphrase will look something like this: `CaravanYenGraphFailing`
 
 # Steghide instructions for Linux
 
-## Install Steghide
+## Install Steghide (Linux)
+
+❏ Open a terminal window and run the commands below to update the `apt` package manager and install steghide:
 
 ```
+sudo apt update
 sudo apt install steghide
 ```
 
-## Embed data in a JPEG file
+## Embed data in a JPEG file (Linux)
+
+❏ First, `cd` to the `data` directory on your desktop. (You can skip this step if you're already there.)
 
 ```
-cd ~/Desktop
-mkdir data
-cd data
+cd ~/Desktop/data
 ```
 
+❏ Type out the following command, replacing `secret.txt` with the name of your secret file and `photo.jpg` with the name of your JPEG file. In the example below, the output file will be called `stego_file.jpg`.
+
 ```
-steghide embed -f -ef secret.txt -cf photo.jpg -sf /data/stego_file.jpg
+steghide embed -ef secret.txt -cf photo.jpg -sf stego_file.jpg
 ```
 
-You'll be prompted to enter a passphrase.
+❏ At the prompt, enter the passphrase you generated earlier.
 
-## Extract data from a JPEG file
+❏ In the file explorer/Finder, go to the `data` directory on the desktop. You should see a new JPEG file (`stego_file.jpg` in the example) which contains your encrypted message. Compare the size of the altered file to the original JPEG.
+
+❏ Open both JPEG files with an image viewer application and compare them. Do you see a difference? (Hint: You can probably see a difference.)
+
+## Extract secret data from a JPEG file (Linux)
+
+❏ To extract the secret file from a JPEG file, run a command like the one below. You'll replace `stego_file.jpg` with the name of your altered JPEG file.
 
 ```
 steghide extract -sf stego_file.jpg
 ```
+Enter the passphrase at the prompt and your secret file will be written to the current directory.
 
-## 
-
-## 
 
 # Mac + Windows Instructions
 
-## ## Download the project code
+## Download the project code
 
 https://github.com/iffybooks/steganography-for-everyone
 
@@ -161,22 +262,13 @@ RUN apt-get update \
 WORKDIR /data
 ```
 
-## Prepare your data
-
-```
-cd ~/Desktop
-mkdir data
-```
-
-Go to your desktop and find the directory called **data**. Put a JPEG photo into the directory, along with a smaller file you're planning to hide.
-
-## Embed data in a JPEG file
+## Embed data in a JPEG file (Docker)
 
 ```
 docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide embed -f -ef /data/secret.txt -cf /data/photo.jpg -sf /data/stego_file.jpg
 ```
 
-## Extract data from a JPEG file
+## Extract data from a JPEG file (Docker)
 
 ```
 docker run -it --rm -v $(pwd)/data:/data steghide-docker steghide extract -sf /data/stego_file.jpg
@@ -196,15 +288,15 @@ docker run -it --rm -v $(pwd)/data:/data steghide-docker /bin/sh
 
 ## Caveats
 
-Social media sites like Instagram and Facebook will re-compress every image you upload, which will most likely destroy your hidden message. Just a heads-up.
+- Social media sites like Instagram and Facebook will re-compress every image you upload, which will most likely destroy your hidden message. Just a heads-up.
 
-It's possible your hidden message will be able to be detected in the future if someone finds a flaw in the way steghide works.
+- It's possible your hidden message will be able to be detected in the future if someone finds a flaw in the way steghide works.
 
-Writing down your password is a liability, so be thoughtful about it.
+- Writing down your password is a liability. Be thoughtful about it.
 
-Be careful who you share passwords with.
+- Be careful who you share passwords with.
 
-Depending on your situation, having steghide installed on your computer may look suspicious. Uninstalling things when you're done is an option.
+- Depending on your situation, having steghide installed on your computer may look suspicious. Uninstalling things when you're done is an option.
 
 ## Further reading
 
@@ -218,6 +310,9 @@ Depending on your situation, having steghide installed on your computer may look
   https://github.com/DominicBreuker/stego-toolkit
   
   Run this command to download the image: `docker pull dominicbreuker/stego-toolkit`
+
+- 'Digital image steganography: Survey and analysis of current methods' (Cheddad, Condell, Curran, and McKevitt 2010)
+  https://www.sciencedirect.com/science/article/abs/pii/S0165168409003648
 
 <div style="page-break-after: always;"></div>
 
