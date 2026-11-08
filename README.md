@@ -405,4 +405,4 @@ This technique removes most of the obvious metadata from an image file, such as 
 
 **Iffy Books**&nbsp;
 
-**319 N. 11th St. #2I, PHL**
+**404 S. 20th St., PHL**
